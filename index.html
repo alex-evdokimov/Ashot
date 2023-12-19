@@ -12,11 +12,11 @@
       <span class="header__name">Кузнецов Ашот</span>
       <div class="header__dropdown" id="languageDropdown">
         <div class="header__container">
-          <a class="header__item" href="#" onclick="changeLanguage('en')"
-            >English</a
+          <button type="button" class="header__item" href="#" id="en"
+            >English</button
           >
-          <a class="header__item" href="#" onclick="changeLanguage('fr')"
-            >Русский</a
+          <button type="button" class="header__item" href="#" id="ru"
+            >Русский</button
           >
           
         </div>
@@ -26,16 +26,16 @@
     </header>
     <nav class="navigation">
         <div class="navigation__container" id="btnNavigation">
-            <button class="navigation__button" id="mainPageBtn">Обо мне</button>
-            <button class="navigation__button" id="workPageBtn">Моя профессия</button>
+            <button type="button" class="navigation__button" id="mainPageBtn">Обо мне</button>
+            <button type="button" class="navigation__button" id="workPageBtn">Моя профессия</button>
         </div>
     </nav>
     <section class="mainPart">
         <div class="mainPart__nav">
           <ul class="nav__list">
-            <li class="nav__item">1</li>
-            <li class="nav__item">1</li>
-            <li class="nav__item">1</li>
+            <li class="nav__item" id="item1"></li>
+            <li class="nav__item" id="item2"></li>
+            <li class="nav__item" id="item3"></li>
           </ul>
         </div>
         <div class="mainPart__content" id="mainPart">
