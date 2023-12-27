@@ -20,7 +20,7 @@ const dataForRender = {
         mainTitle: false,
       },
     ],
-    video: `<iframe width="750" height="480" src="https://www.youtube.com/embed/GALwhyDFBaQ" title="10 лучших аниме-сериалов для взрослых" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+    video: `<iframe width="750" height="480" src="https://www.youtube.com/embed/2BOwSOU150g" title="Невероятный фильм про космос HD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
     content: {
       ru: `
         <p>
@@ -55,7 +55,7 @@ const dataForRender = {
       },
       {
         id: 2,
-        subtitle: { ru: "Мои фотографии", en: "My photos" },
+        subtitle: { ru: "", en: "" },
         mainTitle: false,
       },
       {
@@ -77,16 +77,7 @@ const dataForRender = {
         allowfullscreen
       ></iframe>
     `,
-    images: `<div id="content__imageContainer">
-      <img src="./img/1.jpg">
-      <img src="./img/2.jpg">
-      <img src="./img/3.jpg">
-      <img src="./img/4.jpg">
-      <img src="./img/5.jpg">
-      <img src="./img/6.jpg">
-      <button id="prevBtn">&lt;</button>
-      <button id="nextBtn">&gt;</button>
-    </div>`,
+    images: ``,
     content: {
       ru: `<p>&emsp;По профессии и по призванию – QA инженер. Имею дипломное образование, плюс никогда не заканчивающийся процесс самообразования и самосовершенствования.</p><p>&emsp;QA – это несомненно важный сотрудник для выпуска новых программных продуктов для конечных пользователей. Тестировщик отвечает за проверку приложений и постоянно ищет проблемы, чтобы убедиться в соответствии ПО всем стандартам.  Чтобы обнаружить ошибки и потенциальные проблемы, он проводит планирование и тестирование на разных этапах разработки. QA-инженер тесно взаимодействует с командой разработчиков, проводя тестирование и документирование багов, чтобы гарантировать его правильную работу перед релизом. Кроме того, QA-инженеры прогнозируют поведение пользователей и создают тестовые сценарии для проверки функциональности программного обеспечения. И, в конечном итоге, это важное связующее звено между менеджерами или пользователями приложений и разработчиками.</p>`,
       en: `<p>&emsp;By profession and by vocation – QA engineer. I have a diploma, plus an ongoing process of self-education and self-improvement.</p><p>&emsp;QA is undoubtedly an important team member for releasing new software products to end users. A tester is responsible for checking applications and constantly finding issues to ensure compliance with software standards. To detect errors and potential problems, the QA engineer plans and tests at different stages of development. QA engineers closely interact with the development team, conducting testing and documenting bugs to ensure its proper functioning before release. In addition, QA engineers predict user behavior and create test scenarios to check the functionality of the software. And ultimately, they serve as a crucial link between application managers or users and developers.</p>`,
@@ -97,6 +88,8 @@ const dataForRender = {
 const navItems = document.querySelectorAll(".nav__item");
 const mainPartContent = document.querySelector("#mainPart");
 const btnPages = document.querySelector("#btnNavigation");
+const btnPage = document.querySelectorAll(".navigation__button");
+const footerText = document.querySelectorAll(".footer__text");
 const headerСontainer = document.querySelector(".header__container");
 const btnChangeLang = document.querySelector(".header__dropbtn");
 const nameHeader = document.querySelector(".header__name");
@@ -143,11 +136,8 @@ function renderContent() {
 
   navItems.forEach((item, index) => {
     item.addEventListener("click", () => {
-      // Найдите соответствующий заголовок по индексу
-      const titleIndex = index + 1; // Индекс заголовка соответствует индексу элемента списка + 1
+      const titleIndex = index + 1;
       const targetTitle = document.querySelector(`#title${titleIndex}`);
-
-      // Прокрутите к найденному заголовку
       if (targetTitle) {
         targetTitle.scrollIntoView({ behavior: "smooth" });
       }
@@ -156,8 +146,15 @@ function renderContent() {
 
   dataForRender[currentPage].title.forEach((item, index) => {
     const itemElement = document.querySelector(`${"#item" + (index + 1)}`);
-    console.log(`${"#item" + (index + 1)}`);
-    itemElement.innerText = item.subtitle[currentLang];
+    if (itemElement) {
+      itemElement.innerText = item.subtitle[currentLang];
+
+      if (currentPage === "work" && index === 1) {
+        itemElement.style.display = "none";
+      } else {
+        itemElement.style.display = "block";
+      }
+    }
   });
 }
 
@@ -226,10 +223,18 @@ function changeLanguage(e) {
     currentLang = "ru";
     btnChangeLang.innerText = "Русский язык";
     nameHeader.innerText = "Кузнецов Ашот";
+    btnPage[0].innerText = "Обо мне";
+    btnPage[1].innerText = "Моя профессия";
+    footerText[0].innerHTML = "Телефонный номер: </br>89612789777";
+    footerText[1].innerHTML = "Профессия: </br>QA Automation";
   } else if (e.target.id === "en" && e.target.type === "button") {
     currentLang = "en";
     btnChangeLang.innerText = "English language";
     nameHeader.innerText = "Kuznetsov Ashot";
+    btnPage[0].innerText = "About me";
+    btnPage[1].innerText = "My profession";
+    footerText[0].innerHTML = "Phone number: </br>89612789777";
+    footerText[1].innerHTML = "Profession: </br>QA Automation";
   }
 
   renderSlider();
